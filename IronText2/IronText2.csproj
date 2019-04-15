@@ -123,6 +123,9 @@
     <Content Include="icons\Hopstarter-Sleek-Xp-Basic-Folder-Open.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="icons\Hopstarter-Soft-Scraps-Document-Copy.ico" />
+    <Resource Include="icons\Oxygen-Icons.org-Oxygen-Actions-document-save.ico" />
+    <Resource Include="icons\Hopstarter-Soft-Scraps-Button-Close.ico" />
     <Resource Include="icons\Mattahan-Umicons-Folder-New-Folder.ico" />
     <Content Include="icons\Oxygen-Icons.org-Oxygen-Actions-document-save-as.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

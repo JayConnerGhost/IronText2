@@ -10,15 +10,70 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Menu>
         <MenuItem Header="_File" Margin="0" >
-            <MenuItem Header="_New">
+            <MenuItem Header="_New"  Command="{Binding FileNewCommand}">
             <MenuItem.Icon>
                 <Image Source="/icons/Mattahan-Umicons-Folder-New-Folder.ico" />
             </MenuItem.Icon>
             </MenuItem>
+
+            <MenuItem Header="_Open">
+                <MenuItem.Icon>
+                    <Image Source="/icons/Avosoft-Warm-Toolbar-Folder-open.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="_Save">
+                <MenuItem.Icon>
+                    <Image Source="/icons/Oxygen-Icons.org-Oxygen-Actions-document-save.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="SaveAs">
+                <MenuItem.Icon>
+                    <Image Source="/icons/Oxygen-Icons.org-Oxygen-Actions-document-save-as.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="SaveAll">
+                <MenuItem.Icon>
+                    <Image Source="/icons/Actions-document-save-all-icon.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="_Quit" Command="{Binding CloseCommand}">
+                <MenuItem.Icon>
+                    <Image Source="/icons/Hopstarter-Soft-Scraps-Button-Close.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+
         </MenuItem>
-        <MenuItem Header="_Edit" />
-        <MenuItem Header="_View" />
-        <MenuItem Header="_Window" />
-        <MenuItem Header="_Help" />
+
+        <MenuItem Header="_Edit"  Margin="0" >
+            <MenuItem Header="C_ut">
+                <MenuItem.Icon>
+                    <Image Source="/icons/Alecive-Flatwoken-Apps-Actions-Cut.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="_Copy">
+                <MenuItem.Icon>
+                    <Image Source="/icons/Hopstarter-Soft-Scraps-Document-Copy.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="_Paste">
+                <MenuItem.Icon>
+                    <Image Source="/icons/Everaldo-Kids-Icons-Edit-paste.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="SelectAll">
+                <MenuItem.Icon>
+                    <Image Source="/icons/Saki-NuoveXT-2-Actions-select-all.ico" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </MenuItem>
+
+     
     </Menu>
 </UserControl>
