@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IronText2.Views"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
@@ -12,5 +13,11 @@
              VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"
              Height="Auto"
              >
-   <RichTextBox VerticalAlignment="Stretch"></RichTextBox>
+    <xctk:RichTextBox HorizontalAlignment="Stretch" Height="Auto"  Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" Width="Auto">
+        <FlowDocument>
+            <Paragraph>
+                <Run Text="RichTextBox"/>
+            </Paragraph>
+        </FlowDocument>
+    </xctk:RichTextBox>
 </UserControl>
