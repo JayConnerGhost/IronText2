@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using System;
+using Prism.Mvvm;
 
 namespace IronText2.Models
 {
@@ -12,6 +13,11 @@ namespace IronText2.Models
         public void Save(string fileName, string text)
         {
             throw new System.NotImplementedException();
+        }
+
+        public string CreateDocument()
+        {
+            throw new NotImplementedException();
         }
     }
 }

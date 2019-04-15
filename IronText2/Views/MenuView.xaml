@@ -28,7 +28,7 @@
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Header="SaveAs">
+            <MenuItem Header="SaveAs" Command="{Binding FileSaveAsCommand}">
                 <MenuItem.Icon>
                     <Image Source="/icons/Oxygen-Icons.org-Oxygen-Actions-document-save-as.ico" />
                 </MenuItem.Icon>
@@ -43,25 +43,25 @@
         </MenuItem>
 
         <MenuItem Header="_Edit"  Margin="0" >
-            <MenuItem Header="C_ut">
+            <MenuItem Header="C_ut" Command="{Binding EditCutCommand}" >
                 <MenuItem.Icon>
                     <Image Source="/icons/Alecive-Flatwoken-Apps-Actions-Cut.ico" />
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Header="_Copy">
+            <MenuItem Header="_Copy"  Command="{Binding EditCopyCommand}" >
                 <MenuItem.Icon>
                     <Image Source="/icons/Hopstarter-Soft-Scraps-Document-Copy.ico" />
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Header="_Paste">
+            <MenuItem Header="_Paste"  Command="{Binding EditPasteCommand}" >
                 <MenuItem.Icon>
                     <Image Source="/icons/Everaldo-Kids-Icons-Edit-paste.ico" />
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Header="SelectAll">
+            <MenuItem Header="SelectAll"  Command="{Binding EditSelectAllCommand}" >
                 <MenuItem.Icon>
                     <Image Source="/icons/Saki-NuoveXT-2-Actions-select-all.ico" />
                 </MenuItem.Icon>

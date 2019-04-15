@@ -13,6 +13,10 @@ namespace IronText2.ViewModels
         private bool _canCreateNew=true;
         private bool _canClose=true;
         private bool _canSave=false;
+        private bool _isTextSelected;
+        private bool _isClipboardPopulated;
+        private bool _isTextPopulated=false;
+
 
         public DelegateCommand FileNewCommand { get; private set; }
         public DelegateCommand CloseCommand { get; private set; }
@@ -28,10 +32,95 @@ namespace IronText2.ViewModels
         public MenuViewModel(MenuModel model)
         {
             _model = model;
-            FileNewCommand=new DelegateCommand(CreateNewExecute,CanCreateNewExecute).ObservesProperty(()=>CanCreateNew);
-            CloseCommand=new DelegateCommand(CloseExecute,CanCloseExecute).ObservesProperty(()=>CanClose);
-            FileSaveCommand=new DelegateCommand(SaveExecute,CanSaveExecute).ObservesProperty(()=>CanSave);
-            FileSaveAsCommand=new DelegateCommand(SaveAsExecute,CanSaveExecute).ObservesProperty(()=>CanSave);
+            FileNewCommand =
+                new DelegateCommand(CreateNewExecute, CanCreateNewExecute).ObservesProperty(() => CanCreateNew);
+            CloseCommand = new DelegateCommand(CloseExecute, CanCloseExecute).ObservesProperty(() => CanClose);
+            FileSaveCommand = new DelegateCommand(SaveExecute, CanSaveExecute).ObservesProperty(() => CanSave);
+            FileSaveAsCommand = new DelegateCommand(SaveAsExecute, CanSaveAsExecute).ObservesProperty(() => CanSave);
+
+
+            EditCopyCommand =new DelegateCommand(EditCopyExecute, CanEditCopyExecute).ObservesProperty(() => IsTextSelected);
+            EditCutCommand =new DelegateCommand(EditCutExecute, CanEditCutExecute).ObservesProperty(() => IsTextSelected);
+            EditPasteCommand = new DelegateCommand(EditPasteExecute, CanEditPasteExecute).ObservesProperty(() => IsClipboardPopulated);
+            EditSelectAllCommand = new DelegateCommand(EditSelectAllTextExecute, CanEditSelectAllTextExecute).ObservesProperty(() => IsTextPopulated);
+            //IMPLEMENT in xaml
+        }
+
+        private bool CanSaveAsExecute()
+        {
+            return _canSave;
+        }
+
+        private bool CanEditSelectAllTextExecute()
+        {
+            return IsTextPopulated;
+        }
+
+        private void EditSelectAllTextExecute()
+        {
+            //TODO: code in here to select all text
+        }
+
+        public bool IsTextPopulated
+        {
+            get
+            {
+                bool isTextPopulated = _isTextPopulated;
+                //TODO code in here to work out if text is empty
+                return isTextPopulated;
+            }
+            set
+            {
+                SetProperty(ref _isTextSelected, value);
+
+            }
+        }
+
+        private bool CanEditPasteExecute()
+        {
+            return _isClipboardPopulated;
+        }
+
+        private void EditPasteExecute()
+        {
+            //TODO: code in here to paste from clipboard 
+        }
+
+        public bool IsClipboardPopulated
+        {
+            get
+            {
+                //TODO: code in here to find out if clipboard has contents 
+
+                bool isClipboardPopulated = false;
+                return isClipboardPopulated;
+            }
+            set
+            {
+                SetProperty(ref _isClipboardPopulated,value);
+
+            }
+        }
+
+
+        private bool CanEditCutExecute()
+        {
+            return IsTextSelected;
+        }
+
+        private void EditCutExecute()
+        {
+            //TODO: text cut command in here 
+        }
+
+        private bool CanEditCopyExecute()
+        {
+            return IsTextSelected;
+        }
+
+        private void EditCopyExecute()
+        {
+           //TODO: text copy commands in here ;
         }
 
         private void SaveAsExecute()
@@ -51,6 +140,20 @@ namespace IronText2.ViewModels
             var fileName = String.Empty;
             var text = string.Empty;
             _model.Save(fileName, text);
+        }
+
+        public bool IsTextSelected
+        {
+            get
+            {
+                var isTextSelected = _isTextSelected;
+                return isTextSelected;
+            }
+            set
+            {
+                SetProperty(ref _isTextSelected , value);
+
+            }
         }
 
         public bool CanSave
