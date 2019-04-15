@@ -20,7 +20,7 @@ namespace IronText2.Views
 
         private void ConfigureInitialLayout()
         {
-            _regionManager.RegisterViewWithRegion("Toolbar", typeof(ToolbarView));
+            _regionManager.RegisterViewWithRegion("Menu", typeof(MenuView));
         }
     }
 }
