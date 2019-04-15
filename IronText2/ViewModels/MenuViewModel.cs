@@ -1,21 +1,24 @@
 ﻿using System;
 using System.CodeDom;
 using System.Configuration;
+using IronText2.Events;
 using IronText2.Models;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 
 namespace IronText2.ViewModels
 {
-    public class MenuViewModel : BindableBase
+    public class MenuViewModel : WorkspaceViewModel
     {
         private readonly MenuModel _model;
+        private readonly IEventAggregator _eventAggregator;
         private bool _canCreateNew=true;
         private bool _canClose=true;
-        private bool _canSave=false;
+        private bool _canSave=true;
         private bool _isTextSelected;
         private bool _isClipboardPopulated;
-        private bool _isTextPopulated=false;
+        private bool _isTextPopulated=true;
 
 
         public DelegateCommand FileNewCommand { get; private set; }
@@ -28,10 +31,10 @@ namespace IronText2.ViewModels
         public DelegateCommand EditPasteCommand { get; private set; }
         public DelegateCommand EditSelectAllCommand { get; private set; }
 
-
-        public MenuViewModel(MenuModel model)
+        public MenuViewModel(MenuModel model, IEventAggregator eventAggregator)
         {
             _model = model;
+            _eventAggregator = eventAggregator;
             FileNewCommand =
                 new DelegateCommand(CreateNewExecute, CanCreateNewExecute).ObservesProperty(() => CanCreateNew);
             CloseCommand = new DelegateCommand(CloseExecute, CanCloseExecute).ObservesProperty(() => CanClose);
@@ -46,6 +49,7 @@ namespace IronText2.ViewModels
             //IMPLEMENT in xaml
         }
 
+
         private bool CanSaveAsExecute()
         {
             return _canSave;
@@ -59,6 +63,7 @@ namespace IronText2.ViewModels
         private void EditSelectAllTextExecute()
         {
             //TODO: code in here to select all text
+            _eventAggregator.GetEvent<SelectAllTextEvent>().Publish(true);
         }
 
         public bool IsTextPopulated
