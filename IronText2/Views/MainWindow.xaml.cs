@@ -21,6 +21,8 @@ namespace IronText2.Views
         private void ConfigureInitialLayout()
         {
             _regionManager.RegisterViewWithRegion("Menu", typeof(MenuView));
+            _regionManager.RegisterViewWithRegion("Main", typeof(TextContentView));
+            
         }
     }
 }

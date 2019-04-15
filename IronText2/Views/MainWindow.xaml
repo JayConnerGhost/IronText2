@@ -4,10 +4,10 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="350" Width="525">
-    <DockPanel LastChildFill="True">
+    <DockPanel LastChildFill="True" VerticalAlignment="Stretch" >
         <ContentControl DockPanel.Dock="Top" prism:RegionManager.RegionName="Menu"></ContentControl>
         <ItemsControl DockPanel.Dock="Left" prism:RegionManager.RegionName="Navigation"></ItemsControl>
-        <TabControl prism:RegionManager.RegionName="Tabs"></TabControl>
+        <ContentControl prism:RegionManager.RegionName="Main" Background="#FF1E53E1" BorderBrush="#FFCB1D1D" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"/>
     </DockPanel>
 
 </Window>
