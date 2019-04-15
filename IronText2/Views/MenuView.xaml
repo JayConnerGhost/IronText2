@@ -22,7 +22,7 @@
                 </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Header="_Save">
+            <MenuItem Header="_Save" Command="{Binding FileSaveCommand}">
                 <MenuItem.Icon>
                     <Image Source="/icons/Oxygen-Icons.org-Oxygen-Actions-document-save.ico" />
                 </MenuItem.Icon>
@@ -31,12 +31,6 @@
             <MenuItem Header="SaveAs">
                 <MenuItem.Icon>
                     <Image Source="/icons/Oxygen-Icons.org-Oxygen-Actions-document-save-as.ico" />
-                </MenuItem.Icon>
-            </MenuItem>
-
-            <MenuItem Header="SaveAll">
-                <MenuItem.Icon>
-                    <Image Source="/icons/Actions-document-save-all-icon.png" />
                 </MenuItem.Icon>
             </MenuItem>
 

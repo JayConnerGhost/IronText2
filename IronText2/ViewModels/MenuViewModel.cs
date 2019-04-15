@@ -1,5 +1,7 @@
-﻿using System.CodeDom;
+﻿using System;
+using System.CodeDom;
 using System.Configuration;
+using IronText2.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 
@@ -7,25 +9,62 @@ namespace IronText2.ViewModels
 {
     public class MenuViewModel : BindableBase
     {
+        private readonly MenuModel _model;
         private bool _canCreateNew=true;
         private bool _canClose=true;
+        private bool _canSave=false;
 
         public DelegateCommand FileNewCommand { get; private set; }
         public DelegateCommand CloseCommand { get; private set; }
         public DelegateCommand FileSaveCommand { get; private set; }
         public DelegateCommand FileSaveAsCommand { get; private set; }
-        public DelegateCommand FileSaveAllCommand { get; private set; }
-
+      
         public DelegateCommand EditCopyCommand { get; private set; }
         public DelegateCommand EditCutCommand { get; private set; }
-        public DelegateCommand EditFilePasteCommand { get; private set; }
-        public DelegateCommand EditFileSelectAllCommand { get; private set; }
+        public DelegateCommand EditPasteCommand { get; private set; }
+        public DelegateCommand EditSelectAllCommand { get; private set; }
 
 
-        public MenuViewModel()
+        public MenuViewModel(MenuModel model)
         {
+            _model = model;
             FileNewCommand=new DelegateCommand(CreateNewExecute,CanCreateNewExecute).ObservesProperty(()=>CanCreateNew);
             CloseCommand=new DelegateCommand(CloseExecute,CanCloseExecute).ObservesProperty(()=>CanClose);
+            FileSaveCommand=new DelegateCommand(SaveExecute,CanSaveExecute).ObservesProperty(()=>CanSave);
+            FileSaveAsCommand=new DelegateCommand(SaveAsExecute,CanSaveExecute).ObservesProperty(()=>CanSave);
+        }
+
+        private void SaveAsExecute()
+        {
+            var fileName = String.Empty;
+            var text = string.Empty;
+            _model.Save(fileName, text);
+        }
+
+        private bool CanSaveExecute()
+        {
+            return _canSave;
+        }
+
+        private void SaveExecute()
+        {
+            var fileName = String.Empty;
+            var text = string.Empty;
+            _model.Save(fileName, text);
+        }
+
+        public bool CanSave
+        {
+            get
+            {
+                bool canSave = _canSave;
+                return canSave;
+            }
+            set
+            {
+                SetProperty(ref _canSave, value);
+            }
+
         }
 
         private bool CanCloseExecute()
@@ -35,7 +74,7 @@ namespace IronText2.ViewModels
 
         private void CloseExecute()
         {
-            System.Windows.Application.Current.Shutdown();
+            _model.CloseApplication();
         }
 
         public bool CanClose
@@ -58,8 +97,8 @@ namespace IronText2.ViewModels
 
         private void CreateNewExecute()
         {
-            //TODO: implement file save logic 
-        
+          var tmpFileName=_model.CreateDocument();
+
         }
 
         private bool CanCreateNewExecute()
