@@ -4,7 +4,7 @@ namespace IronText2.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "Prism Application";
+        private string _title = "IronText2";
         public string Title
         {
             get { return _title; }

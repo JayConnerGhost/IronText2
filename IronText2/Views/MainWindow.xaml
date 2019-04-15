@@ -4,7 +4,10 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="350" Width="525">
-    <Grid>
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
-    </Grid>
+    <DockPanel LastChildFill="True">
+        <ContentControl DockPanel.Dock="Top" prism:RegionManager.RegionName="Toolbar"></ContentControl>
+        <ItemsControl DockPanel.Dock="Left" prism:RegionManager.RegionName="Navigation"></ItemsControl>
+        <TabControl prism:RegionManager.RegionName="Tabs"></TabControl>
+    </DockPanel>
+
 </Window>

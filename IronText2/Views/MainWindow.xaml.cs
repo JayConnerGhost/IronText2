@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Prism.Regions;
 
 namespace IronText2.Views
 {
@@ -7,9 +8,19 @@ namespace IronText2.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly IRegionManager _regionManager;
+
+
+        public MainWindow(IRegionManager regionManager)
         {
+            _regionManager = regionManager;
             InitializeComponent();
+            ConfigureInitialLayout();
+        }
+
+        private void ConfigureInitialLayout()
+        {
+            _regionManager.RegisterViewWithRegion("Toolbar", typeof(ToolbarView));
         }
     }
 }
