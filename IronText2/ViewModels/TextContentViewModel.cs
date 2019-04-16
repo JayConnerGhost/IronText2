@@ -14,7 +14,7 @@ namespace IronText2.ViewModels
         public TextContentViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-           // _eventAggregator.GetEvent<SelectAllTextEvent>().Subscribe(SelectAllText);
+          
         }
 
         public string TextContent
@@ -29,15 +29,5 @@ namespace IronText2.ViewModels
             get { return _selectedText;}
             set { SetProperty(ref _selectedText, value); }
         }
-
-//        private void SelectAllText(bool selectAll)
-//        {
-//            if (selectAll)
-//            {
-//                //Q. how to select all text
-//
-//                MessageBox.Show("Recived >" + CurrentSelectedText);
-//            }
-//        }
-    }
+     }
 }

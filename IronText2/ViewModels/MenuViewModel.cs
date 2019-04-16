@@ -1,12 +1,7 @@
-﻿using System;
-using System.CodeDom;
-using System.Configuration;
-using System.Windows;
-using IronText2.Events;
+﻿using IronText2.Events;
 using IronText2.Models;
 using Prism.Commands;
 using Prism.Events;
-using Prism.Mvvm;
 
 namespace IronText2.ViewModels
 {
@@ -22,7 +17,7 @@ namespace IronText2.ViewModels
         private bool _isTextSelected=true;
         private bool _isClipboardPopulated=true;
         private bool _isTextPopulated=true;
-        private bool _canOpen;
+        private bool _canOpen=true;
 
 
         public DelegateCommand FileNewCommand { get; private set; }
@@ -57,7 +52,7 @@ namespace IronText2.ViewModels
 
         private bool CanOpenFileExecute()
         {
-            return true;
+            return _canOpen;
         }
 
         private void OpenFileExecute()
@@ -231,8 +226,7 @@ namespace IronText2.ViewModels
 
         private void CreateNewExecute()
         {
-          
-
+            _eventAggregator.GetEvent<CreateNewEvent>().Publish();
         }
 
         private bool CanCreateNewExecute()

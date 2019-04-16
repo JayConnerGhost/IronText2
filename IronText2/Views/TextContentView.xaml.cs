@@ -42,7 +42,14 @@ namespace IronText2.Views
             _eventAggregator.GetEvent<FileSaveEvent>().Subscribe(SaveText);
             _eventAggregator.GetEvent<FileSaveAsEvent>().Subscribe(SaveTextAs);
             _eventAggregator.GetEvent<FileOpenEvent>().Subscribe(FileOpen);
+            _eventAggregator.GetEvent<CreateNewEvent>().Subscribe(FileNew);
             
+        }
+
+        private void FileNew()
+        {
+            Text.Text = string.Empty;
+            _model.FileName = string.Empty;
         }
 
         private void FileOpen()
