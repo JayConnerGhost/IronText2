@@ -8,20 +8,36 @@ namespace IronText2.ViewModels
     public class TextContentViewModel: WorkspaceViewModel
     {
         private readonly IEventAggregator _eventAggregator;
+        private string _text;
+        private string _selectedText;
 
         public TextContentViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<SelectAllTextEvent>().Subscribe(SelectAllText);
+           // _eventAggregator.GetEvent<SelectAllTextEvent>().Subscribe(SelectAllText);
         }
 
-        private void SelectAllText(bool selectAll)
+        public string TextContent
         {
-            if (selectAll)
-            {
-                //Q. how to select all text
-                MessageBox.Show("Recived");
-            }
+            get { return _text; }
+            set { SetProperty(ref _text, value); }
         }
+
+
+        public string CurrentSelectedText
+        {
+            get { return _selectedText;}
+            set { SetProperty(ref _selectedText, value); }
+        }
+
+//        private void SelectAllText(bool selectAll)
+//        {
+//            if (selectAll)
+//            {
+//                //Q. how to select all text
+//
+//                MessageBox.Show("Recived >" + CurrentSelectedText);
+//            }
+//        }
     }
 }

@@ -8,16 +8,18 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="#FF2A16F0"
+             d:DesignHeight="450" d:DesignWidth="800" 
              VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
              VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"
              Height="Auto"
              >
-    <xctk:RichTextBox HorizontalAlignment="Stretch" Height="Auto"  Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" Width="Auto">
-        <FlowDocument>
-            <Paragraph>
-                <Run Text="RichTextBox"/>
-            </Paragraph>
-        </FlowDocument>
-    </xctk:RichTextBox>
+    <TextBox  AcceptsReturn="True" 
+              TextWrapping="Wrap"
+              SpellCheck.IsEnabled="True" 
+              Language="en-US"
+             Name="Text"
+              >
+
+    </TextBox>
+     
 </UserControl>

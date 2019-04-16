@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Configuration;
+using System.Windows;
 using IronText2.Events;
 using IronText2.Models;
 using Prism.Commands;
@@ -13,11 +14,13 @@ namespace IronText2.ViewModels
     {
         private readonly MenuModel _model;
         private readonly IEventAggregator _eventAggregator;
+
+        //Fix needed here once the turn off and on checking of dependancy understood 
         private bool _canCreateNew=true;
         private bool _canClose=true;
         private bool _canSave=true;
-        private bool _isTextSelected;
-        private bool _isClipboardPopulated;
+        private bool _isTextSelected=true;
+        private bool _isClipboardPopulated=true;
         private bool _isTextPopulated=true;
 
 
@@ -46,7 +49,7 @@ namespace IronText2.ViewModels
             EditCutCommand =new DelegateCommand(EditCutExecute, CanEditCutExecute).ObservesProperty(() => IsTextSelected);
             EditPasteCommand = new DelegateCommand(EditPasteExecute, CanEditPasteExecute).ObservesProperty(() => IsClipboardPopulated);
             EditSelectAllCommand = new DelegateCommand(EditSelectAllTextExecute, CanEditSelectAllTextExecute).ObservesProperty(() => IsTextPopulated);
-            //IMPLEMENT in xaml
+          
         }
 
 
@@ -62,7 +65,6 @@ namespace IronText2.ViewModels
 
         private void EditSelectAllTextExecute()
         {
-            //TODO: code in here to select all text
             _eventAggregator.GetEvent<SelectAllTextEvent>().Publish(true);
         }
 
@@ -83,12 +85,12 @@ namespace IronText2.ViewModels
 
         private bool CanEditPasteExecute()
         {
-            return _isClipboardPopulated;
+            return true;
         }
 
         private void EditPasteExecute()
         {
-            //TODO: code in here to paste from clipboard 
+            _eventAggregator.GetEvent<PasteTextEvent>().Publish();
         }
 
         public bool IsClipboardPopulated
@@ -97,7 +99,7 @@ namespace IronText2.ViewModels
             {
                 //TODO: code in here to find out if clipboard has contents 
 
-                bool isClipboardPopulated = false;
+                bool isClipboardPopulated = true;
                 return isClipboardPopulated;
             }
             set
@@ -107,32 +109,30 @@ namespace IronText2.ViewModels
             }
         }
 
-
+      
         private bool CanEditCutExecute()
         {
-            return IsTextSelected;
+            return true;
         }
 
         private void EditCutExecute()
         {
-            //TODO: text cut command in here 
+            _eventAggregator.GetEvent<CutTextEvent>().Publish();
         }
 
         private bool CanEditCopyExecute()
         {
-            return IsTextSelected;
+            return true;
         }
 
         private void EditCopyExecute()
         {
-           //TODO: text copy commands in here ;
+            _eventAggregator.GetEvent<CopyTextEvent>().Publish();
         }
 
         private void SaveAsExecute()
         {
-            var fileName = String.Empty;
-            var text = string.Empty;
-            _model.Save(fileName, text);
+            _eventAggregator.GetEvent<FileSaveEvent>().Publish();
         }
 
         private bool CanSaveExecute()
@@ -142,9 +142,8 @@ namespace IronText2.ViewModels
 
         private void SaveExecute()
         {
-            var fileName = String.Empty;
-            var text = string.Empty;
-            _model.Save(fileName, text);
+            _eventAggregator.GetEvent<FileSaveEvent>().Publish();
+        
         }
 
         public bool IsTextSelected
@@ -205,7 +204,7 @@ namespace IronText2.ViewModels
 
         private void CreateNewExecute()
         {
-          var tmpFileName=_model.CreateDocument();
+          
 
         }
 
