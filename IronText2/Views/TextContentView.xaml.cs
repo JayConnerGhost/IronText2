@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IronText2.Events;
+using IronText2.Models;
 using Microsoft.Win32;
 using Prism.Events;
 
@@ -25,30 +26,68 @@ namespace IronText2.Views
     public partial class TextContentView : UserControl
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly TextContentModel _model;
 
-        public TextContentView(IEventAggregator eventAggregator)
+
+        public TextContentView(IEventAggregator eventAggregator, TextContentModel model)
         {
             _eventAggregator = eventAggregator;
+            _model = model;
+
             InitializeComponent();
             _eventAggregator.GetEvent<SelectAllTextEvent>().Subscribe(SelectAllText);
             _eventAggregator.GetEvent<CutTextEvent>().Subscribe(CutText);
             _eventAggregator.GetEvent<CopyTextEvent>().Subscribe(CopyText);
             _eventAggregator.GetEvent<PasteTextEvent>().Subscribe(PasteText);
             _eventAggregator.GetEvent<FileSaveEvent>().Subscribe(SaveText);
-
+            _eventAggregator.GetEvent<FileSaveAsEvent>().Subscribe(SaveTextAs);
+            _eventAggregator.GetEvent<FileOpenEvent>().Subscribe(FileOpen);
+            
         }
+
+        private void FileOpen()
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Text.Text = File.ReadAllText(openFileDialog.FileName);
+                _model.FileName = openFileDialog.FileName;
+            }
+        }
+
 
         private void SaveText()
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text file (*.txt)|*.txt|C# file (*.cs)|*.cs|all Files (*.*)|*.*";
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            if (saveFileDialog.ShowDialog() == true)
-                File.WriteAllText(saveFileDialog.FileName, Text.Text);
+            if (!string.IsNullOrEmpty(_model.FileName))
+            {
+                File.WriteAllText(_model.FileName, Text.Text);
+            }
+            else
+            {
+                SaveTextAs();
+            }
+
+           
         }
 
 
-        private void PasteText()
+        private void SaveTextAs()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Text file (*.txt)|*.txt|C# file (*.cs)|*.cs|all Files (*.*)|*.*",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
+            if (saveFileDialog.ShowDialog() == true)
+                File.WriteAllText(saveFileDialog.FileName, Text.Text);
+            _model.FileName = saveFileDialog.FileName;
+        }
+
+    private void PasteText()
         {
            Text.Paste();
         }

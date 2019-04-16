@@ -16,7 +16,7 @@
             </MenuItem.Icon>
             </MenuItem>
 
-            <MenuItem Header="_Open">
+            <MenuItem Header="_Open" Command="{Binding FileOpenCommand}">
                 <MenuItem.Icon>
                     <Image Source="/icons/Avosoft-Warm-Toolbar-Folder-open.ico" />
                 </MenuItem.Icon>

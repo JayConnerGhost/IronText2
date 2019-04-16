@@ -22,6 +22,7 @@ namespace IronText2.ViewModels
         private bool _isTextSelected=true;
         private bool _isClipboardPopulated=true;
         private bool _isTextPopulated=true;
+        private bool _canOpen;
 
 
         public DelegateCommand FileNewCommand { get; private set; }
@@ -33,6 +34,7 @@ namespace IronText2.ViewModels
         public DelegateCommand EditCutCommand { get; private set; }
         public DelegateCommand EditPasteCommand { get; private set; }
         public DelegateCommand EditSelectAllCommand { get; private set; }
+        public DelegateCommand FileOpenCommand { get; private set; }
 
         public MenuViewModel(MenuModel model, IEventAggregator eventAggregator)
         {
@@ -43,6 +45,7 @@ namespace IronText2.ViewModels
             CloseCommand = new DelegateCommand(CloseExecute, CanCloseExecute).ObservesProperty(() => CanClose);
             FileSaveCommand = new DelegateCommand(SaveExecute, CanSaveExecute).ObservesProperty(() => CanSave);
             FileSaveAsCommand = new DelegateCommand(SaveAsExecute, CanSaveAsExecute).ObservesProperty(() => CanSave);
+            FileOpenCommand = new DelegateCommand(OpenFileExecute, CanOpenFileExecute).ObservesProperty(() => CanOpen);
 
 
             EditCopyCommand =new DelegateCommand(EditCopyExecute, CanEditCopyExecute).ObservesProperty(() => IsTextSelected);
@@ -50,6 +53,30 @@ namespace IronText2.ViewModels
             EditPasteCommand = new DelegateCommand(EditPasteExecute, CanEditPasteExecute).ObservesProperty(() => IsClipboardPopulated);
             EditSelectAllCommand = new DelegateCommand(EditSelectAllTextExecute, CanEditSelectAllTextExecute).ObservesProperty(() => IsTextPopulated);
           
+        }
+
+        private bool CanOpenFileExecute()
+        {
+            return true;
+        }
+
+        private void OpenFileExecute()
+        {
+           _eventAggregator.GetEvent<FileOpenEvent>().Publish();
+        }
+
+        public bool CanOpen
+        {
+            get
+            {
+                bool canOpen = _canOpen;
+                return canOpen;
+            }
+            set
+            {
+                SetProperty(ref _canOpen, value);
+
+            }
         }
 
 
@@ -132,7 +159,7 @@ namespace IronText2.ViewModels
 
         private void SaveAsExecute()
         {
-            _eventAggregator.GetEvent<FileSaveEvent>().Publish();
+            _eventAggregator.GetEvent<FileSaveAsEvent>().Publish();
         }
 
         private bool CanSaveExecute()

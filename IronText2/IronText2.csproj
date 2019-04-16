@@ -63,9 +63,12 @@
     </ApplicationDefinition>
     <Compile Include="Events\CopyTextEvent.cs" />
     <Compile Include="Events\CutTextEvent.cs" />
+    <Compile Include="Events\FileOpenEvent.cs" />
+    <Compile Include="Events\FileSaveAsEvent.cs" />
     <Compile Include="Events\FileSaveEvent.cs" />
     <Compile Include="Events\SelectAllTextEvent.cs" />
     <Compile Include="Models\MenuModel.cs" />
+    <Compile Include="Models\TextContentModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="Events\PasteTextEvent.cs" />
     <Compile Include="ViewModels\TextContentViewModel.cs" />
