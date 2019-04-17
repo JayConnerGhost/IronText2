@@ -2,7 +2,8 @@
 
 namespace IronText2.Events
 {
-    public class PasteTextEvent: PubSubEvent
+    public class TextEmptyEvent : PubSubEvent
     {
+
     }
 }

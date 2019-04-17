@@ -22,6 +22,7 @@ namespace IronText2.Views
         {
             _regionManager.RegisterViewWithRegion("Menu", typeof(MenuView));
             _regionManager.RegisterViewWithRegion("Main", typeof(TextContentView));
+            _regionManager.RegisterViewWithRegion("Navigation", typeof(IdeaPadView));
             
         }
     }

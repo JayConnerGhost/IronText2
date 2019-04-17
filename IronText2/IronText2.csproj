@@ -68,18 +68,28 @@
     <Compile Include="Events\FileSaveAsEvent.cs" />
     <Compile Include="Events\FileSaveEvent.cs" />
     <Compile Include="Events\SelectAllTextEvent.cs" />
+    <Compile Include="Events\TextEmptyEvent.cs" />
+    <Compile Include="Events\TextPopulatedEvent.cs" />
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\TextContentModel.cs" />
+    <Compile Include="ViewModels\IdeaPadViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="Events\PasteTextEvent.cs" />
     <Compile Include="ViewModels\TextContentViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
+    <Compile Include="Views\IdeaPadView.xaml.cs">
+      <DependentUpon>IdeaPadView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TextContentView.xaml.cs">
       <DependentUpon>TextContentView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\IdeaPadView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

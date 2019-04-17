@@ -13,10 +13,9 @@ namespace IronText2.ViewModels
         //Fix needed here once the turn off and on checking of dependancy understood 
         private bool _canCreateNew=true;
         private bool _canClose=true;
-        private bool _canSave=true;
         private bool _isTextSelected=true;
         private bool _isClipboardPopulated=true;
-        private bool _isTextPopulated=true;
+        private bool _isTextPopulated=false;
         private bool _canOpen=true;
 
 
@@ -38,8 +37,8 @@ namespace IronText2.ViewModels
             FileNewCommand =
                 new DelegateCommand(CreateNewExecute, CanCreateNewExecute).ObservesProperty(() => CanCreateNew);
             CloseCommand = new DelegateCommand(CloseExecute, CanCloseExecute).ObservesProperty(() => CanClose);
-            FileSaveCommand = new DelegateCommand(SaveExecute, CanSaveExecute).ObservesProperty(() => CanSave);
-            FileSaveAsCommand = new DelegateCommand(SaveAsExecute, CanSaveAsExecute).ObservesProperty(() => CanSave);
+            FileSaveCommand = new DelegateCommand(SaveExecute, CanSaveExecute).ObservesProperty(() => IsTextPopulated);
+            FileSaveAsCommand = new DelegateCommand(SaveAsExecute, CanSaveAsExecute).ObservesProperty(() => IsTextPopulated);
             FileOpenCommand = new DelegateCommand(OpenFileExecute, CanOpenFileExecute).ObservesProperty(() => CanOpen);
 
 
@@ -47,7 +46,20 @@ namespace IronText2.ViewModels
             EditCutCommand =new DelegateCommand(EditCutExecute, CanEditCutExecute).ObservesProperty(() => IsTextSelected);
             EditPasteCommand = new DelegateCommand(EditPasteExecute, CanEditPasteExecute).ObservesProperty(() => IsClipboardPopulated);
             EditSelectAllCommand = new DelegateCommand(EditSelectAllTextExecute, CanEditSelectAllTextExecute).ObservesProperty(() => IsTextPopulated);
-          
+
+            _eventAggregator.GetEvent<TextEmptyEvent>().Subscribe(TextEmpty);
+            _eventAggregator.GetEvent<TextPopulatedEvent>().Subscribe(TextNowPopulated);
+
+        }
+
+        private void TextEmpty()
+        {
+            _isTextPopulated = false;
+        }
+
+        private void TextNowPopulated()
+        {
+            _isTextPopulated = true;
         }
 
         private bool CanOpenFileExecute()
@@ -77,7 +89,7 @@ namespace IronText2.ViewModels
 
         private bool CanSaveAsExecute()
         {
-            return _canSave;
+            return IsTextPopulated;
         }
 
         private bool CanEditSelectAllTextExecute()
@@ -107,7 +119,7 @@ namespace IronText2.ViewModels
 
         private bool CanEditPasteExecute()
         {
-            return true;
+            return IsTextPopulated;
         }
 
         private void EditPasteExecute()
@@ -127,14 +139,13 @@ namespace IronText2.ViewModels
             set
             {
                 SetProperty(ref _isClipboardPopulated,value);
-
             }
         }
 
       
         private bool CanEditCutExecute()
         {
-            return true;
+            return IsTextPopulated;
         }
 
         private void EditCutExecute()
@@ -144,7 +155,7 @@ namespace IronText2.ViewModels
 
         private bool CanEditCopyExecute()
         {
-            return true;
+            return IsTextPopulated;
         }
 
         private void EditCopyExecute()
@@ -159,7 +170,7 @@ namespace IronText2.ViewModels
 
         private bool CanSaveExecute()
         {
-            return _canSave;
+            return IsTextPopulated;
         }
 
         private void SaveExecute()
@@ -182,19 +193,7 @@ namespace IronText2.ViewModels
             }
         }
 
-        public bool CanSave
-        {
-            get
-            {
-                bool canSave = _canSave;
-                return canSave;
-            }
-            set
-            {
-                SetProperty(ref _canSave, value);
-            }
-
-        }
+       
 
         private bool CanCloseExecute()
         {
@@ -234,8 +233,5 @@ namespace IronText2.ViewModels
             return CanCreateNew;
         }
 #endregion
-
-
-
     }
 }

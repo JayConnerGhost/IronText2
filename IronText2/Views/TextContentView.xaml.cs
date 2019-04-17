@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,9 @@ using System.Windows.Shapes;
 using IronText2.Events;
 using IronText2.Models;
 using Microsoft.Win32;
+using Prism.Commands;
 using Prism.Events;
-
+using Prism;
 namespace IronText2.Views
 {
     /// <summary>
@@ -43,8 +45,9 @@ namespace IronText2.Views
             _eventAggregator.GetEvent<FileSaveAsEvent>().Subscribe(SaveTextAs);
             _eventAggregator.GetEvent<FileOpenEvent>().Subscribe(FileOpen);
             _eventAggregator.GetEvent<CreateNewEvent>().Subscribe(FileNew);
-            
         }
+
+
 
         private void FileNew()
         {
@@ -94,7 +97,7 @@ namespace IronText2.Views
             _model.FileName = saveFileDialog.FileName;
         }
 
-    private void PasteText()
+        private void PasteText()
         {
            Text.Paste();
         }

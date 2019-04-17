@@ -18,6 +18,7 @@
               SpellCheck.IsEnabled="True" 
               Language="en-US"
              Name="Text"
+              Text="{Binding TextContent,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
               >
 
     </TextBox>
