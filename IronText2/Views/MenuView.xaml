@@ -43,7 +43,7 @@
         </MenuItem>
 
         <MenuItem Header="_Edit"  Margin="0" >
-            <MenuItem Header="C_ut" Command="{Binding EditCutCommand}" >
+            <MenuItem Header="C_ut" Command="{Binding EditCutCommand,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                 <MenuItem.Icon>
                     <Image Source="/icons/Alecive-Flatwoken-Apps-Actions-Cut.ico" />
                 </MenuItem.Icon>

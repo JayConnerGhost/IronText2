@@ -9,7 +9,6 @@ namespace IronText2.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
         private string _text;
-        private string _selectedText;
         private bool IsEmpty = true;
 
 
@@ -19,36 +18,34 @@ namespace IronText2.ViewModels
           
         }
 
+
+
         public string TextContent
         {
             get { return _text; }
             set
             {
-                SetProperty(ref _text, value);
                 TextChanged(value);
+                SetProperty(ref _text, value);
             }
         }
 
         private void TextChanged(string value)
         {
-            if (string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value)|| value.Length==0)
             {
                 IsEmpty = true;
                 _eventAggregator.GetEvent<TextEmptyEvent>().Publish();
             }
-
-            if (IsEmpty)
+            else
             {
-                IsEmpty = false;
-                _eventAggregator.GetEvent<TextPopulatedEvent>().Publish();
+                if (IsEmpty)
+                {
+                    IsEmpty = false;
+                    _eventAggregator.GetEvent<TextPopulatedEvent>().Publish();
+                }
             }
         }
 
-
-        public string CurrentSelectedText
-        {
-            get { return _selectedText;}
-            set { SetProperty(ref _selectedText, value); }
-        }
      }
 }

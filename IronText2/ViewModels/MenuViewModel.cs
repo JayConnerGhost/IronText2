@@ -19,16 +19,16 @@ namespace IronText2.ViewModels
         private bool _canOpen=true;
 
 
-        public DelegateCommand FileNewCommand { get; private set; }
-        public DelegateCommand CloseCommand { get; private set; }
-        public DelegateCommand FileSaveCommand { get; private set; }
-        public DelegateCommand FileSaveAsCommand { get; private set; }
+        public DelegateCommand FileNewCommand { get;  set; }
+        public DelegateCommand CloseCommand { get;  set; }
+        public DelegateCommand FileSaveCommand { get;  set; }
+        public DelegateCommand FileSaveAsCommand { get;  set; }
       
-        public DelegateCommand EditCopyCommand { get; private set; }
-        public DelegateCommand EditCutCommand { get; private set; }
-        public DelegateCommand EditPasteCommand { get; private set; }
-        public DelegateCommand EditSelectAllCommand { get; private set; }
-        public DelegateCommand FileOpenCommand { get; private set; }
+        public DelegateCommand EditCopyCommand { get;  set; }
+        public DelegateCommand EditCutCommand { get;  set; }
+        public DelegateCommand EditPasteCommand { get;  set; }
+        public DelegateCommand EditSelectAllCommand { get;  set; }
+        public DelegateCommand FileOpenCommand { get;  set; }
 
         public MenuViewModel(MenuModel model, IEventAggregator eventAggregator)
         {
@@ -42,8 +42,8 @@ namespace IronText2.ViewModels
             FileOpenCommand = new DelegateCommand(OpenFileExecute, CanOpenFileExecute).ObservesProperty(() => CanOpen);
 
 
-            EditCopyCommand =new DelegateCommand(EditCopyExecute, CanEditCopyExecute).ObservesProperty(() => IsTextSelected);
-            EditCutCommand =new DelegateCommand(EditCutExecute, CanEditCutExecute).ObservesProperty(() => IsTextSelected);
+            EditCopyCommand =new DelegateCommand(EditCopyExecute, CanEditCopyExecute).ObservesProperty(() => IsTextPopulated);
+            EditCutCommand =new DelegateCommand(EditCutExecute, CanEditCutExecute).ObservesProperty(() => IsTextPopulated);
             EditPasteCommand = new DelegateCommand(EditPasteExecute, CanEditPasteExecute).ObservesProperty(() => IsClipboardPopulated);
             EditSelectAllCommand = new DelegateCommand(EditSelectAllTextExecute, CanEditSelectAllTextExecute).ObservesProperty(() => IsTextPopulated);
 
@@ -54,12 +54,13 @@ namespace IronText2.ViewModels
 
         private void TextEmpty()
         {
-            _isTextPopulated = false;
+            IsTextPopulated = false;
+       
         }
 
         private void TextNowPopulated()
         {
-            _isTextPopulated = true;
+            IsTextPopulated = true;
         }
 
         private bool CanOpenFileExecute()
@@ -112,7 +113,7 @@ namespace IronText2.ViewModels
             }
             set
             {
-                SetProperty(ref _isTextSelected, value);
+                SetProperty(ref _isTextPopulated, value);
 
             }
         }
