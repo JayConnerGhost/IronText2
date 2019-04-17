@@ -13,7 +13,6 @@ namespace IronText2.ViewModels
         //Fix needed here once the turn off and on checking of dependancy understood 
         private bool _canCreateNew=true;
         private bool _canClose=true;
-        private bool _isTextSelected=true;
         private bool _isClipboardPopulated=true;
         private bool _isTextPopulated=false;
         private bool _canOpen=true;
@@ -52,6 +51,66 @@ namespace IronText2.ViewModels
 
         }
 
+        public bool CanOpen
+        {
+            get
+            {
+                bool canOpen = _canOpen;
+                return canOpen;
+            }
+            set
+            {
+                SetProperty(ref _canOpen, value);
+
+            }
+        }
+
+        public bool IsTextPopulated
+        {
+            get
+            {
+                bool isTextPopulated = _isTextPopulated;
+                //TODO code in here to work out if text is empty
+                return isTextPopulated;
+            }
+            set
+            {
+                SetProperty(ref _isTextPopulated, value);
+
+            }
+        }
+
+        public bool IsClipboardPopulated
+        {
+            get
+            {
+                //TODO: code in here to find out if clipboard has contents 
+
+                bool isClipboardPopulated = true;
+                return isClipboardPopulated;
+            }
+            set
+            {
+                SetProperty(ref _isClipboardPopulated,value);
+            }
+        }
+
+        public bool CanClose
+        {
+            get
+            {
+                var canClose = _canClose;
+                return canClose;
+            }
+            set =>SetProperty(ref _canClose , value);
+        }
+
+        public bool CanCreateNew
+        {
+            get { return _canCreateNew; }
+            set { SetProperty(ref _canCreateNew, value); }
+        }
+
         private void TextEmpty()
         {
             IsTextPopulated = false;
@@ -73,20 +132,6 @@ namespace IronText2.ViewModels
            _eventAggregator.GetEvent<FileOpenEvent>().Publish();
         }
 
-        public bool CanOpen
-        {
-            get
-            {
-                bool canOpen = _canOpen;
-                return canOpen;
-            }
-            set
-            {
-                SetProperty(ref _canOpen, value);
-
-            }
-        }
-
 
         private bool CanSaveAsExecute()
         {
@@ -103,24 +148,9 @@ namespace IronText2.ViewModels
             _eventAggregator.GetEvent<SelectAllTextEvent>().Publish(true);
         }
 
-        public bool IsTextPopulated
-        {
-            get
-            {
-                bool isTextPopulated = _isTextPopulated;
-                //TODO code in here to work out if text is empty
-                return isTextPopulated;
-            }
-            set
-            {
-                SetProperty(ref _isTextPopulated, value);
-
-            }
-        }
-
         private bool CanEditPasteExecute()
         {
-            return IsTextPopulated;
+            return IsClipboardPopulated;
         }
 
         private void EditPasteExecute()
@@ -128,22 +158,7 @@ namespace IronText2.ViewModels
             _eventAggregator.GetEvent<PasteTextEvent>().Publish();
         }
 
-        public bool IsClipboardPopulated
-        {
-            get
-            {
-                //TODO: code in here to find out if clipboard has contents 
 
-                bool isClipboardPopulated = true;
-                return isClipboardPopulated;
-            }
-            set
-            {
-                SetProperty(ref _isClipboardPopulated,value);
-            }
-        }
-
-      
         private bool CanEditCutExecute()
         {
             return IsTextPopulated;
@@ -180,21 +195,6 @@ namespace IronText2.ViewModels
         
         }
 
-        public bool IsTextSelected
-        {
-            get
-            {
-                var isTextSelected = _isTextSelected;
-                return isTextSelected;
-            }
-            set
-            {
-                SetProperty(ref _isTextSelected , value);
-
-            }
-        }
-
-       
 
         private bool CanCloseExecute()
         {
@@ -206,23 +206,6 @@ namespace IronText2.ViewModels
             _model.CloseApplication();
         }
 
-        public bool CanClose
-        {
-            get
-            {
-                var canClose = _canClose;
-                return canClose;
-            }
-            set =>SetProperty(ref _canClose , value);
-        }
-
-        #region CanCreateNew
-
-        public bool CanCreateNew
-        {
-            get { return _canCreateNew; }
-            set { SetProperty(ref _canCreateNew, value); }
-        }
 
         private void CreateNewExecute()
         {
@@ -233,6 +216,6 @@ namespace IronText2.ViewModels
         {
             return CanCreateNew;
         }
-#endregion
+
     }
 }
