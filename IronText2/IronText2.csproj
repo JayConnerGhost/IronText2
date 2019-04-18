@@ -70,9 +70,13 @@
     <Compile Include="Events\SelectAllTextEvent.cs" />
     <Compile Include="Events\TextEmptyEvent.cs" />
     <Compile Include="Events\TextPopulatedEvent.cs" />
+    <Compile Include="Extensions\IdeasExtensions.cs" />
+    <Compile Include="Models\IdeaModel.cs" />
+    <Compile Include="Models\IdeasModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\TextContentModel.cs" />
     <Compile Include="ViewModels\IdeaPadViewModel.cs" />
+    <Compile Include="ViewModels\IdeaViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="Events\PasteTextEvent.cs" />
     <Compile Include="ViewModels\TextContentViewModel.cs" />

@@ -8,12 +8,27 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-<UserControl.Resources>
-<!--data template for ideas here  -->
 
-</UserControl.Resources>
-    <Grid>
+    <DockPanel>
 
-        <TextBlock>Idea pad </TextBlock>
-    </Grid>
+        <ListView Margin="10" Name="Ideas" 
+            ItemsSource="{Binding Ideas}"      
+            >
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <DockPanel>
+                    <WrapPanel DockPanel.Dock="Top">
+                        <TextBlock Text="{Binding Id}"></TextBlock>
+                        <TextBlock Text=", "></TextBlock>
+                        <TextBlock Text="{Binding Text}"></TextBlock>
+                    </WrapPanel>
+                </DockPanel>
+
+            </DataTemplate>
+
+        </ListView.ItemTemplate>
+
+
+        </ListView>
+    </DockPanel>
 </UserControl>
