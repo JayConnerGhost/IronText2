@@ -7,11 +7,16 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+             VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"
+             Height="Auto"
+            BorderThickness="0px"
+     >
 
     <DockPanel>
-
-        <ListView Margin="10" Name="Ideas" 
+        <TextBlock DockPanel.Dock="Top">Ideas</TextBlock>
+        <ListView  Name="Ideas" 
             ItemsSource="{Binding Ideas}"      
             >
         <ListView.ItemTemplate>
