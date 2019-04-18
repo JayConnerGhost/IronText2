@@ -15,7 +15,21 @@
      >
 
     <DockPanel>
-        <TextBlock DockPanel.Dock="Top">Ideas</TextBlock>
+        <TextBlock DockPanel.Dock="Top"
+                   Background="AntiqueWhite" 
+                   Foreground="Navy" 
+  
+                   FontFamily="Arial"
+                   FontSize="14"
+                   FontWeight="Bold"
+  
+                   LineHeight="Auto"
+                   Padding="5,5,5,5"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+  
+                   Typography.NumeralStyle="OldStyle"
+                   Typography.SlashedZero="True">Ideas</TextBlock>
         <ListView  Name="Ideas" 
             ItemsSource="{Binding Ideas}"      
             >

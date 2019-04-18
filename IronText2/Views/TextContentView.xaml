@@ -19,7 +19,8 @@
               Language="en-US"
              Name="Text"
               Text="{Binding TextContent,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-              >
+              BorderBrush="Transparent"
+              BorderThickness="0">
 
     </TextBox>
      
