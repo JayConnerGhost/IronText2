@@ -16,7 +16,7 @@
 
     <DockPanel>
         <TextBlock DockPanel.Dock="Top"
-                   Background="AntiqueWhite" 
+                
                    Foreground="Navy" 
   
                    FontFamily="Arial"
@@ -30,10 +30,36 @@
   
                    Typography.NumeralStyle="OldStyle"
                    Typography.SlashedZero="True">Ideas</TextBlock>
+
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top"  HorizontalAlignment="Center"  >
+            <Button>
+                <TextBlock  
+                           Foreground="Navy" 
+                           Padding="5,5,5,5"
+                           FontFamily="Arial"
+                           FontSize="14"
+                           FontWeight="Normal">SelectAll</TextBlock></Button>
+            <Button>
+                <TextBlock  
+                           Foreground="Navy" 
+                           Padding="5,5,5,5"
+                           FontFamily="Arial"
+                           FontSize="14"
+                           FontWeight="Normal">Add</TextBlock></Button>
+            <Button >
+                <TextBlock 
+                           Foreground="Navy" 
+                           Padding="5,5,5,5"
+                           FontFamily="Arial"
+                           FontSize="14"
+                           FontWeight="Normal">Remove</TextBlock>
+            </Button>
+<!-- add in commands and functionality to the above-->
+        </StackPanel>
         <ListView  Name="Ideas" 
             ItemsSource="{Binding Ideas}"      
             >
-        <ListView.ItemTemplate>
+            <ListView.ItemTemplate>
             <DataTemplate>
                 <DockPanel>
                     <WrapPanel DockPanel.Dock="Top">
